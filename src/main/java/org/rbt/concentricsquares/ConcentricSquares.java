@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class ConcentricSquares {
     private static final String[] SQUARE_COLOR = {"crimson"};
-    private static final Integer CANVAS_SIZE = 1000;
+    private static final Integer CANVAS_SIZE = 600;
     private static final String OUTPUT_FILE = "/Users/rbtuc/Desktop/con-squares.html";
 
     
@@ -22,7 +22,7 @@ public class ConcentricSquares {
             pw.println("<body>");
             pw.println("\t<canvas id='sp' height='" 
                 + CANVAS_SIZE + "' width='"
-                + CANVAS_SIZE + " style='background: white; border:1px solid darkgray></canvas>'"); 
+                + CANVAS_SIZE + "' style='background: white; border:1px solid darkgray;'></canvas>'"); 
             pw.println("\t<script type='text/javascript'>setTimeout(1000, doGraph())</script>");
             pw.println("</body></html>");
         } catch (Exception ex) {
@@ -36,14 +36,21 @@ public class ConcentricSquares {
     }
     private static void printScriptTag(PrintWriter pw) throws Exception {
             pw.println("<script type='text/javascript'>");
-    
+            pw.println("\tconst CANVAS_SIZE = " + CANVAS_SIZE + ";");
+            pw.println("\tconst centerX = " + (CANVAS_SIZE / 2) + ";");
+            pw.println("\tconst centerY = " + (CANVAS_SIZE / 2) + ";");
+            pw.println("\tasync function doGraph() {");
+            pw.println("\t\tlet c=document.getElementById('sp');");
+            pw.println("\t\tlet ctx=c.getContext('2d');");
+            pw.println("\t\tctx.strokeStyle = 'black';");
+            pw.println("\t\tctx.lineWidth = 1;");
             pw.println("// axis lines");
             pw.println("\t\tctx.beginPath();");
             pw.println("\t\tctx.lineWidth = 2;");
-            pw.println("\t\tctx.moveTo(0, 0);");
-            pw.println("\t\tctx.lineTo(" + CANVAS_SIZE + "," + CANVAS_SIZE + ");");
-            pw.println("\t\tctx.moveTo(0," + CANVAS_SIZE + ");");
-            pw.println("\t\tctx.lineTo(" + CANVAS_SIZE + ",0)");
+            pw.println("\t\tctx.moveTo(0, centerY);");
+            pw.println("\t\tctx.lineTo(CANVAS_SIZE, centerY);");
+            pw.println("\t\tctx.moveTo(centerX, 0);");
+            pw.println("\t\tctx.lineTo(centerX, CANVAS_SIZE)");
             pw.println("\t\tctx.stroke();");
             pw.println("\t}");
  
@@ -65,6 +72,7 @@ public class ConcentricSquares {
             pw.println("\t};");
             pw.println();
 */
+            pw.println("\t");
             pw.println("</script>");
             pw.println();
     }
